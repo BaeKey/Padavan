@@ -29,7 +29,6 @@
 
 #define foreach_x(x)		for (i=0; i<nvram_get_int(x); i++)
 
-#define BATTLENET_PORT		6112
 #define TRANSMISSION_PPORT	51413
 #define TRANSMISSION_RPORT	9091
 #define ARIA_PPORT		16888
@@ -1140,10 +1139,6 @@ ipt_filter_rules(char *man_if, char *wan_if, char *lan_if, char *lan_ip,
 		if (is_nat_enabled) {
 			char *dmz_ip;
 			
-			/* Accept to BattleNET */
-			if (nvram_match("sp_battle_ips", "1"))
-				fprintf(fp, "-A %s -p udp --dport %d -j %s\n", dtype, BATTLENET_PORT, logaccept);
-			
 #if defined (USE_MATCH_CONNTRACK)
 			/* Accept to Virtual Servers, UPnP, DMZ */
 			fprintf(fp, "-A %s -m %s %s -j %s\n", dtype, "conntrack --ctstate", "DNAT", logaccept);
@@ -1795,12 +1790,6 @@ ipt_nat_rules(char *man_if, char *man_ip,
 		
 		snprintf(dmz_ip, sizeof(dmz_ip), "%s", nvram_safe_get("dmz_ip"));
 		is_use_dmz = (is_valid_ipv4(dmz_ip)) ? 1 : 0;
-		
-		/* BattleNET (PREROUTING + POSTROUTING) */
-		if (wan_ip && nvram_match("sp_battle_ips", "1")) {
-			fprintf(fp, "-A %s -p udp -d %s --sport %d -j NETMAP --to %s\n", "PREROUTING", wan_ip, BATTLENET_PORT, lan_net);
-			fprintf(fp, "-A %s -p udp -s %s --dport %d -j NETMAP --to %s\n", "POSTROUTING", lan_net, BATTLENET_PORT, wan_ip);
-		}
 		
 #if 0
 		/* miniupnpd postrouting chain (is really needed for XBox One?) */
