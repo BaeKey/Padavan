@@ -34,7 +34,7 @@ struct nvram_pair router_defaults[] = {
 
 	/* Miscellaneous parameters */
 	{ "time_zone", DEF_TIMEZONE },
-	{ "log_float_ui", "1" },		/* WebUI syslog float panel mode */
+	{ "log_float_ui", "0" },		/* WebUI syslog float panel mode */
 	{ "log_ipaddr", "" },			/* syslog recipient IP */
 	{ "log_port", "514" },			/* syslog recipient Port */
 	{ "log_level", "0" },			/* Bitmask 0:off 1:denied 2:accepted */
@@ -1042,7 +1042,7 @@ struct nvram_pair router_defaults[] = {
 	{ "nf_alg_rtsp", "0" },
 	{ "nf_alg_sip", "0" },
 
-	{ "help_enable", "1" },
+	{ "help_enable", "0" },
 
 	{ "vpns_enable", "0" },
 	{ "vpns_type", "0" },
