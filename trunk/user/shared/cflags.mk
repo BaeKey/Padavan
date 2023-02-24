@@ -114,7 +114,6 @@ endif
 ##################################################################
 
 CFLAGS += $(if $(FIRMWARE_BUILDS_VER),-DFWBLDSTR=\"$(FIRMWARE_BUILDS_VER)\",)
-CFLAGS += $(if $(FIRMWARE_BUILDS_REV),-DFWREVSTR=\"$(FIRMWARE_BUILDS_REV)\",)
 
 ifdef CONFIG_MMC_BLOCK
 CFLAGS += -DUSE_MMC_SUPPORT
