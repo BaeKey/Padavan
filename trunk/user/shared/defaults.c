@@ -1028,7 +1028,7 @@ struct nvram_pair router_defaults[] = {
 	{ "nf_nat_type", "2" },
 	{ "nf_nat_loop", "1" },
 #if (BOARD_RAM_SIZE > 128)
-	{ "nf_max_conn", "32768" },
+	{ "nf_max_conn", "16384" },
 #elif (BOARD_RAM_SIZE > 32)
 	{ "nf_max_conn", "16384" },
 #else
